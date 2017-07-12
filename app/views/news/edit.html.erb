@@ -1,0 +1,38 @@
+<h2>Edit</h2>
+
+<%= form_for(@news) do |f| %>
+
+    <% if @news.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-danger">
+            <%= pluralize(@news.errors.count, "error") %>.
+          </div>
+          <ul>
+            <% @news.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field" id="title_email">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field" id="summary_email">
+      <%= f.label :summary %><br>
+      <%= f.text_field :summary %>
+    </div>
+
+    <div class="field" id="content_email">
+      <%= f.label :content %><br>
+      <%= f.text_area :content, size: "60x12" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sauvegarder" %>
+    </div>
+<% end %>
+
+<%= link_to "Back", :back %>

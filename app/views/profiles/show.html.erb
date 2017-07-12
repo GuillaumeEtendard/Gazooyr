@@ -1,0 +1,25 @@
+@<%= @profile.user.username %>
+
+<%= @profile.name %>
+<%= @profile.place %>
+<%= @profile.website %>
+<%= @profile.bio %>
+<%= image_tag @profile.avatar.to_s, size: "150x150" %>
+
+<br>
+<%= @profile.followers.count %> Abonnés
+<%= @profile.followee.count %> Abonnements
+
+<% if user_signed_in? %>
+    <% if current_user == @profile.user %>
+        <%= link_to "Editer", edit_profile_path('me') %>
+    <% else %>
+        <div class="follow">
+          <% if current_user_is_following(current_user.profile.id, @profile.id) %>
+              <%= link_to 'Unfollow', profile_follow_path(@profile.id), method: :delete %>
+          <% else %>
+              <%= link_to 'Follow', profile_follow_index_path(@profile.id), method: :post %>
+          <% end %>
+        </div>
+    <% end %>
+<% end %>

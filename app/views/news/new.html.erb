@@ -1,0 +1,28 @@
+<% if @news.errors.any? %>
+    <ul>
+      <% @news.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= form_for @news, url: {action: "create"}, html: {class: "form", id: "new_news"} do |f| %>
+    <div class="field" id="news_title">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field" id="news_summary">
+      <%= f.label :summary %><br>
+      <%= f.text_field :summary %>
+    </div>
+
+    <div class="field" id="news_content">
+      <%= f.label :content %><br>
+      <%= f.text_area :content, size: "60x12" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sauvegarder" %>
+    </div>
+<% end %>

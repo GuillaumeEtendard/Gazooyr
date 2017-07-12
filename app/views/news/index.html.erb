@@ -1,0 +1,7 @@
+News
+
+<% @news.each do |news| %>
+    <h1><%= news.title %></h1>
+    <p><%= news.summary %></p>
+    <p><%= news.content %></p>
+<% end %>

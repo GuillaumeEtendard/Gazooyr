@@ -1,0 +1,39 @@
+<h1><%= @news.title %></h1>
+<p><%= @news.summary %></p>
+<p><%= @news.content %></p>
+
+<div class="textile-text"></div>
+
+<hr>
+
+<p><%= @news.comments.count %> Commentaire(s)</p>
+
+<% if user_signed_in? %>
+    <%= form_for @comment, :url => news_comments_path(@news), html: {class: "form", id: "new_comment"} do |f| %>
+        <div class="field" id="comment_email">
+          <%= f.label :comment %><br>
+          <%= f.text_field :comment %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Envoyer" %>
+        </div>
+    <% end %>
+<% end %>
+
+<br>
+
+<ul class="media-list">
+  <% @news.comments.each do |comment| %>
+      <li class="media">
+        <div class="media-left">
+          <a href="#">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><%= comment.comment %></h4>
+          <%= comment.user.username %>
+        </div>
+      </li>
+  <% end %>
+</ul>

@@ -1,0 +1,9 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.navbar-default .navbar-nav > li > a.btn{
+  color: #fff;
+  &:hover{
+    color: #000000;
+  }
+}

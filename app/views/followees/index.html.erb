@@ -1,0 +1,7 @@
+Abonnements de @<%= @profile.user.username %>
+
+<% if @followee %>
+    <% @followee.each do |followee| %>
+        <li><%= link_to '@' + followee.get_profile_by_followee(followee.followee_id).user.username, profile_path(followee.get_profile_by_followee(followee.followee_id).user.username) %></li>
+    <% end %>
+<% end %>

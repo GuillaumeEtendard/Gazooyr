@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      Gazooies
+      <% if @gazooies %>
+          <% @gazooies.each do |gazooy| %>
+              <div class="gazooy-block">
+                <h1><%= gazooy.text %></h1>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="well"></div>
+      <div class="jumbotron">
+        <h1>You're on Gazooyr !</h1>
+        <p>Le twitter qu'il est vachement plus mieux</p>
+      </div>
+
+      <div class="trends">Tendances</div>
+
+      <div class="pages">
+        <% if @pages %>
+            <% @pages.each do |page| %>
+                <h1><%= page.title %></h1>
+            <% end %>
+        <% end %>
+      </div>
+
+      <div>Les derniers gazooies</div>
+    </div>
+  </div>
+</div>

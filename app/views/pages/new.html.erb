@@ -1,0 +1,30 @@
+Création d'une nouvelle page
+
+<% if @page.errors.any? %>
+    <ul>
+      <% @page.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= form_for @page, url: {action: "create"}, html: {class: "form", id: "new_page"} do |f| %>
+    <div class="field" id="page_title">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field" id="page_slug">
+      <%= f.label :slug %><br>
+      <%= f.text_field :slug %>
+    </div>
+
+    <div class="field" id="page_content">
+      <%= f.label :content %><br>
+      <%= f.text_area :content, size: "60x12" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sauvegarder" %>
+    </div>
+<% end %>

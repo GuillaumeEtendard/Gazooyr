@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gazooyr</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <ul class="nav navbar-header">
+      <li><%= link_to "Gazooyr", home_index_path, class: 'navbar-brand' %></li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li>
+        <%= link_to "Stream", gazooies_path %>
+      </li>
+      <li><%= link_to 'Gazooyer', '#', {class: 'btn btn-primary', 'data-toggle': 'modal', 'data-target': '#new_gazooy_modal'} %></li>
+      <% if @pages_menu %>
+          <% @pages_menu.each do |page| %>
+              <li><%= page.title %></li>
+          <% end %>
+      <% end %>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="account-dropdown"><%= current_user.username %>
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Mon Compte", edit_user_registration_path %></li>
+              <li><%= link_to "Mon Profile", edit_profile_path('me') %></li>
+            </ul>
+          </li>
+          <li><%= link_to "Moi", profile_path('me') %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, id: 'logout' %></li>
+          <li><%= link_to "Quitter Gazooyr", user_registration_path, method: :delete, data: {confirm: "You sure?"} %></li>
+      <% else %>
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="modal fade" id="new_gazooy_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Fermer</span></button>
+        <h4 class="modal-title" id="myModalLabel">Gazooyez!</h4>
+      </div>
+      <%= form_for Gazooy.new, html: {id: "new_gazooy"} do |f| %>
+          <div class="modal-body">
+            <div class="field">
+              <%= f.label :text %><br/>
+              <%= f.text_field :text, autofocus: true, id: 'gazooy_text' %>
+            </div>
+            Chars left: <span id="gazooy_counter" data-maximum-length="142">142</span>
+          </div>
+          <div class="modal-footer">
+            <div class="actions">
+              <%= f.submit "Envoyer !" %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+<%= yield %>
+
+<%= javascript_include_tag 'gazooies', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>

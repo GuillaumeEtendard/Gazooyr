@@ -1,0 +1,4 @@
+<div class="page-content">
+  <%= @page.title %>
+  <%= raw RedCloth.new(@page.content).to_html %>
+</div>

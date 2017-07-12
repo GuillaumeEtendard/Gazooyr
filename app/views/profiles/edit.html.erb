@@ -1,0 +1,45 @@
+<h2>Edit</h2>
+
+<%= form_for(@profile) do |f| %>
+
+    <% if @profile.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-danger">
+            <%= pluralize(@profile.errors.count, "error") %>.
+          </div>
+          <ul>
+            <% @profile.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field" id="page_name">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <%= f.file_field :avatar %>
+
+    <div class="field" id="page_place">
+      <%= f.label :place %><br>
+      <%= f.text_field :place %>
+    </div>
+
+    <div class="field" id="page_website">
+      <%= f.label :website %><br>
+      <%= f.text_field :website %>
+    </div>
+
+    <div class="field" id="page_bio">
+      <%= f.label :bio %><br>
+      <%= f.text_area :bio, size: "60x12" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Mettre à jour !" %>
+    </div>
+<% end %>
+
+<%= link_to "Back", :back %>
