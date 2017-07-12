@@ -17,12 +17,19 @@
         <p>Le twitter qu'il est vachement plus mieux</p>
       </div>
 
-      <div class="trends">Tendances</div>
+      <div class="trends">
+        <h3>Tendances</h3>
+        <% if @trends %>
+            <% @trends.each do |trend| %>
+                <p><%= link_to '#' + trend.first, hash_tag_path(trend.first) %></p>
+            <% end %>
+        <% end %>
+      </div>
 
       <div class="pages">
         <% if @pages %>
             <% @pages.each do |page| %>
-                <h1><%= page.title %></h1>
+                <p><%= page.title %></p>
             <% end %>
         <% end %>
       </div>

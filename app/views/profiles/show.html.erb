@@ -16,9 +16,9 @@
     <% else %>
         <div class="follow">
           <% if current_user_is_following(current_user.profile.id, @profile.id) %>
-              <%= link_to 'Unfollow', profile_follow_path(@profile.id), method: :delete %>
+              <%= link_to 'Unfollow', profile_unfollow_path(:profile_id => current_user.profile.id, :user_id => @profile.id), method: :delete %>
           <% else %>
-              <%= link_to 'Follow', profile_follow_index_path(@profile.id), method: :post %>
+              <%= link_to 'Follow', profile_follow_path(:profile_id => current_user.profile.id, :user_id => @profile.id), method: :post %>
           <% end %>
         </div>
     <% end %>

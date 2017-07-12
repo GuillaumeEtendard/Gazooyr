@@ -1,7 +1,12 @@
 <div class="gazooies-block">
   <% @gazooies.each do |gazooy| %>
       <div class="gazooy-block">
-        <%= gazooy.text.gsub(gazooy.text.slice(/#\w+/), '<a href="' + hash_tag_path(gazooy.text.slice(/#\w+/).sub!("#", "")) + '">' + gazooy.text.slice(/#\w+/) + '</a>').html_safe %>
+
+        <%= hash_tag_content = gazooy.text.to_s.gsub(/#\w+/).each do |hash_tag|
+          link_to($&, hash_tag_path(hash_tag.sub!("#", "")))
+          end
+            hash_tag_content.html_safe %>
+
         <%= link_to profile_path(gazooy.user.username), class: 'avatar' do %>
             <%= image_tag(gazooy.user.profile.avatar.thumb.url, :alt => 'avatar', class: 'avatar', width: 150, height: 150) %>
         <% end %>

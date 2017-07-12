@@ -10,6 +10,7 @@ class NewsController < ApplicationController
   end
 
   def new
+    sign_in_redirect
     @news = News.new
   end
 
@@ -24,6 +25,7 @@ class NewsController < ApplicationController
   end
 
   def edit
+    sign_in_redirect
     @news = News.find(params[:id])
   end
 
@@ -37,6 +39,11 @@ class NewsController < ApplicationController
   end
 
   private
+  def sign_in_redirect
+    if !current_user
+      return redirect_to new_user_session_path, alert: "Vous devez vous connecter"
+    end
+  end
   def news_params
     params.require(:news).permit(:title, :summary, :content)
   end

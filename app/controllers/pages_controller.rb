@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def new
+    sign_in_redirect
     @page = Page.new
   end
 
@@ -17,6 +18,7 @@ class PagesController < ApplicationController
   end
 
   def edit
+    sign_in_redirect
     @page = Page.find(params[:id])
   end
 
@@ -29,7 +31,18 @@ class PagesController < ApplicationController
     end
   end
 
+  def destroy
+    @page = Page.find(params[:id])
+    @page.destroy
+    redirect_to pages_path
+  end
+
   private
+    def sign_in_redirect
+      if !current_user
+        return redirect_to new_user_session_path, alert: "Vous devez vous connecter"
+      end
+    end
     def pages_params
       params.require(:page).permit(:title, :slug, :content)
     end
