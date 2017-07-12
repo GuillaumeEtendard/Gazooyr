@@ -17,3 +17,9 @@ brew unlink imagemagick
 brew link imagemagick@6 --force
 bundle install
 ```
+
+### RSPEC
+```sh
+FEATURES : OK
+ROUTING : OK
+```
